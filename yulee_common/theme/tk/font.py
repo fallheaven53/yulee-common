@@ -15,10 +15,24 @@ _FALLBACK_ORDER = [
 ]
 
 
+def _families():
+    """설치 폰트 패밀리 집합. Tk root가 없으면 임시 root를 만들어 조회."""
+    import tkinter as tk
+    import tkinter.font as tkfont
+    try:
+        return set(tkfont.families())
+    except RuntimeError:                  # no default root window
+        r = tk.Tk()
+        r.withdraw()
+        try:
+            return set(tkfont.families(r))
+        finally:
+            r.destroy()
+
+
 def resolve_font_family():
     """시스템 설치 폰트에서 폴백 순서대로 첫 발견 패밀리 반환."""
-    import tkinter.font as tkfont
-    families = set(tkfont.families())
+    families = _families()
     for fam in _FALLBACK_ORDER:
         if fam in families:
             return fam
@@ -27,8 +41,7 @@ def resolve_font_family():
 
 def install_check():
     """Wanted Sans·Pretendard 설치 여부 (도구·운영 진단용)."""
-    import tkinter.font as tkfont
-    families = set(tkfont.families())
+    families = _families()
     return {
         "wanted_sans": any(f in families for f in
                            ("Wanted Sans Variable", "Wanted Sans")),

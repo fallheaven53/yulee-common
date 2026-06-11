@@ -13,7 +13,7 @@ from .theme import (
     resolve_font_family, get_tk_typo, install_check,
 )
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __all__ = [
     "GSheetClient", "get_client", "SCOPES_FULL", "SCOPES_SLIM",
     "get_secret", "get_gcp_credentials_dict", "get_spreadsheet_id",

@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.1 — 2026-06-11
+
+버그 수정 (patch).
+
+- font._families: Tk root 없이 resolve_font_family/install_check 단독 호출 시 RuntimeError("no default root window") — 임시 root 생성으로 해결. 진단 스크립트에서 단독 사용 가능.
+
 ## v0.3.0 — 2026-06-11
 
 feat: theme.tk submodule for Tkinter color/font token sharing (설계서 #2026-073). minor — 기존 API 전부 하위 호환.
