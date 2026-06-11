@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yulee-common"
-version = "0.2.2"
-description = "율이공방 공통 GCP/Sheets/Secrets/Theme 유틸"
+version = "0.3.0"
+description = "율이공방 공통 GCP/Sheets/Secrets/Theme 유틸 (Streamlit + Tkinter)"
 requires-python = ">=3.10"
 dependencies = [
     "gspread>=5.10,<7",

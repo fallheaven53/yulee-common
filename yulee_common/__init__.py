@@ -9,9 +9,11 @@ from .theme import (
     apply_style, toggle_mode, get_current_mode,
     DARK_TOKENS, LIGHT_TOKENS, SPACING, RADIUS, TYPO, PLOTLY_TEMPLATE_DARK,
     header, sidebar_brand, card, metric_row,
+    apply_tk_style, toggle_tk_mode, get_current_tk_mode,
+    resolve_font_family, get_tk_typo, install_check,
 )
 
-__version__ = "0.2.2"
+__version__ = "0.3.0"
 __all__ = [
     "GSheetClient", "get_client", "SCOPES_FULL", "SCOPES_SLIM",
     "get_secret", "get_gcp_credentials_dict", "get_spreadsheet_id",
@@ -21,5 +23,7 @@ __all__ = [
     "DARK_TOKENS", "LIGHT_TOKENS", "SPACING", "RADIUS", "TYPO",
     "PLOTLY_TEMPLATE_DARK",
     "header", "sidebar_brand", "card", "metric_row",
+    "apply_tk_style", "toggle_tk_mode", "get_current_tk_mode",
+    "resolve_font_family", "get_tk_typo", "install_check",
     "__version__",
 ]

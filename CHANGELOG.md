@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.3.0 — 2026-06-11
+
+feat: theme.tk submodule for Tkinter color/font token sharing (설계서 #2026-073). minor — 기존 API 전부 하위 호환.
+
+- `theme/tk/style.py`: apply_tk_style(root, mode, override) — clam 기반 ttk.Style 매핑(TButton 골드·Treeview·TNotebook 등) + tk.* 전역 option_add. toggle_tk_mode·get_current_tk_mode
+- `theme/tk/font.py`: resolve_font_family(Wanted Sans → Pretendard → 시스템 한글 폴백), get_tk_typo(px→pt 환산 6종), install_check(설치 진단)
+- `theme/tk/components.py`: header_tk(골드 구분선)·card_tk
+- v0.2.x theme.tokens 100% 재사용 (SSoT, 별도 색 정의 0)
+- tkinter import는 전부 함수 내부 지연 — tkinter 없는 환경(Streamlit Cloud)에서도 패키지 import 안전
+- 단위 테스트 9건 추가 (총 61건). 같은 프로세스 Tk 재생성 TclError 회피를 위해 session-scope 공유 root 사용
+
+영향: Streamlit 6개 앱 0 (v0.3.0 핀 갱신은 선택). Tkinter 도구 8개 적용 가능.
+
 ## v0.2.2 — 2026-06-11
 
 버그 수정 (patch) — CSS 텍스트 노출 근본 차단.

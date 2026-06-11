@@ -49,6 +49,26 @@ def fake_ws():
     return FakeWorksheet(values=[["h1", "h2"], ["a", "b"]])
 
 
+@pytest.fixture(scope="session")
+def shared_tk_root():
+    """세션 전체가 공유하는 단일 Tk root.
+
+    같은 프로세스에서 Tk를 destroy 후 재생성하면 TclError가 나므로
+    (Windows Tcl 한계) 모든 tk 테스트가 이 root 하나를 재사용한다.
+    """
+    import tkinter as tk
+    try:
+        r = tk.Tk()
+    except tk.TclError:
+        pytest.skip("디스플레이 없음 — Tk 생성 불가")
+    r.withdraw()
+    yield r
+    try:
+        r.destroy()
+    except Exception:
+        pass
+
+
 @pytest.fixture
 def fake_secrets(monkeypatch):
     """st.secrets를 일반 dict로 대체. 테스트가 내용을 직접 구성."""
