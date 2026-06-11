@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.1 — 2026-06-11
+
+버그 수정 (patch) — 10W 프로토타입 실사고 대응.
+
+- apply_style: 주입 CSS의 빈 줄 제거 + 폰트 `<link>`와 `<style>` 블록을 별도 markdown 호출로 분리. Streamlit markdown 파서가 `<style>` 블록 안 빈 줄에서 HTML 블록을 끊어 이후 CSS가 본문에 텍스트로 노출되던 문제 해결.
+- 회귀 테스트 추가 (스타일 블록 빈 줄 금지).
+
+영향 앱: 10W (requirements @v0.2.1 갱신 필요).
+
 ## v0.2.0 — 2026-06-11
 
 theme 서브패키지 추가 (설계서 #2026-071). minor — v0.1.0 API 전부 하위 호환.

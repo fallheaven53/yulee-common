@@ -42,9 +42,12 @@ def apply_style(mode=None, *, override=None):
     st.session_state[_APPLIED_KEY] = signature
     st.session_state[_MODE_KEY] = mode
 
+    # 빈 줄이 있으면 Streamlit markdown 파서가 <style> HTML 블록을 끊고
+    # 이후 CSS를 본문 텍스트로 렌더한다 — 반드시 제거 (v0.2.1 수정).
     css = build_css(tokens, mode=mode)
-    st.markdown(f"{inject_font()}\n<style>\n{css}\n</style>",
-                unsafe_allow_html=True)
+    css = "\n".join(line for line in css.splitlines() if line.strip())
+    st.markdown(inject_font(), unsafe_allow_html=True)
+    st.markdown(f"<style>\n{css}\n</style>", unsafe_allow_html=True)
 
 
 def toggle_mode():

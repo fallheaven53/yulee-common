@@ -29,27 +29,37 @@ def fake_st(monkeypatch):
 
 def test_apply_style_injects_once(fake_st):
     apply_style()
-    assert len(fake_st.markdown_calls) == 1
-    body = fake_st.markdown_calls[0]
-    assert "<style>" in body and "--yl-bg: #1A1D2E;" in body
-    assert "cdn.jsdelivr.net" in body          # 폰트 주입 포함
+    # 폰트 <link> 1회 + <style> 1회 = 호출 2회 (별도 주입 — v0.2.1)
+    assert len(fake_st.markdown_calls) == 2
+    font, style = fake_st.markdown_calls
+    assert "cdn.jsdelivr.net" in font
+    assert "<style>" in style and "--yl-bg: #1A1D2E;" in style
 
     # 같은 모드 재호출 → 중복 주입 없음 (7.3 가드)
     apply_style()
-    assert len(fake_st.markdown_calls) == 1
+    assert len(fake_st.markdown_calls) == 2
+
+
+def test_style_block_has_no_blank_lines(fake_st):
+    # 빈 줄이 있으면 Streamlit markdown이 <style> 블록을 끊고
+    # 이후 CSS가 본문 텍스트로 노출됨 (10W 실사고, v0.2.1 회귀 테스트)
+    apply_style()
+    style = fake_st.markdown_calls[1]
+    for line in style.splitlines():
+        assert line.strip() != "", "스타일 블록에 빈 줄 존재 — CSS 텍스트 노출 위험"
 
 
 def test_apply_style_reinjects_on_mode_change(fake_st):
     apply_style(mode="dark")
     apply_style(mode="light")                  # 모드 변경 → 재주입
-    assert len(fake_st.markdown_calls) == 2
-    assert "--yl-bg: #FAFAF7;" in fake_st.markdown_calls[1]
+    assert len(fake_st.markdown_calls) == 4
+    assert "--yl-bg: #FAFAF7;" in fake_st.markdown_calls[3]
     assert fake_st.session_state["yl_theme_mode"] == "light"
 
 
 def test_apply_style_override(fake_st):
     apply_style(override={"color.accent": "#123456"})
-    assert "--yl-accent: #123456;" in fake_st.markdown_calls[0]
+    assert "--yl-accent: #123456;" in fake_st.markdown_calls[1]
 
 
 def test_get_current_mode_defaults_dark(fake_st):
