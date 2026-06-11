@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.2.0 — 2026-06-11
+
+theme 서브패키지 추가 (설계서 #2026-071). minor — v0.1.0 API 전부 하위 호환.
+
+- `theme/tokens.py`: DARK/LIGHT 토큰(미드나잇 #1A1D2E + 골드 #C9A961), SPACING·RADIUS·TYPO(한글 행간 1.6·tabular-nums), PLOTLY_TEMPLATE_DARK
+- `theme/css.py`: build_css(:root 변수 + 컴포넌트 규칙), inject_font(Wanted Sans CDN @v1.0.3 핀 — 2026-06-11 검증 200 OK, Pretendard·시스템 한글 폴백 스택), inject_layout_helpers
+- `theme/apply.py`: apply_style(mode·override, session_state 가드로 중복 주입 방지), toggle_mode, get_current_mode
+- `theme/components.py`: header·sidebar_brand·card·metric_row (html.escape 정제)
+- `theme/assets/`: base.css(yl-card·yl-metric·yl-header·yl-msg), config.toml.template
+- 단위 테스트 21건 추가 (총 50건): WCAG AA 대비비 검증, XSS 이스케이프, CSS 주입 가드 포함
+- pyproject v0.2.0 + package-data(assets)
+
+영향 앱: 10W(프로토타입 적용 예정) → 이후 #2026-070 순서 동기화.
+
 ## v0.1.0 — 2026-06-11
 
 최초 릴리스 (설계서 #2026-070).

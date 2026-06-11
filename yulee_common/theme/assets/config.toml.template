@@ -1,0 +1,13 @@
+# yulee-common theme 표준 .streamlit/config.toml (설계서 #2026-071 7.1)
+# 다크 기본. 라이트 기본 앱은 base="light" + 라이트 토큰으로 치환.
+
+[theme]
+base = "dark"
+primaryColor = "#C9A961"
+backgroundColor = "#1A1D2E"
+secondaryBackgroundColor = "#252937"
+textColor = "#FAFAF7"
+font = "sans serif"
+
+[server]
+maxUploadSize = 50

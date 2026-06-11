@@ -1,0 +1,93 @@
+/* yulee-common theme — 정적 컴포넌트 규칙 (토큰 변수 참조, 설계서 6절) */
+
+/* 카드 (6.3) */
+.yl-card {
+  background-color: var(--yl-surface);
+  border-radius: var(--yl-radius-md);
+  padding: var(--yl-space-3);
+  box-shadow: var(--yl-card-shadow);
+  border: 1px solid var(--yl-border);
+  margin-bottom: var(--yl-space-2);
+}
+.yl-card-title {
+  color: var(--yl-accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: none;
+  margin-bottom: var(--yl-space-1);
+}
+
+/* 지표 카드 행 (metric_row) */
+.yl-metric-row {
+  display: flex;
+  gap: var(--yl-space-2);
+  flex-wrap: wrap;
+}
+.yl-metric {
+  flex: 1;
+  min-width: 120px;
+  background-color: var(--yl-surface);
+  border: 1px solid var(--yl-border);
+  border-radius: var(--yl-radius-md);
+  padding: var(--yl-space-3);
+  text-align: center;
+}
+.yl-metric .yl-metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--yl-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.yl-metric .yl-metric-label {
+  font-size: 13px;
+  color: var(--yl-text-secondary);
+  margin-top: var(--yl-space-1);
+}
+
+/* 헤더 (6.1) — 하단 골드 1px 구분선 */
+.yl-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--yl-space-2);
+  padding-bottom: var(--yl-space-2);
+  border-bottom: 1px solid var(--yl-accent);
+  margin-bottom: var(--yl-space-3);
+}
+.yl-header .yl-header-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--yl-primary);
+  letter-spacing: -0.02em;
+}
+.yl-header .yl-header-subtitle {
+  font-size: 13px;
+  color: var(--yl-text-secondary);
+}
+
+/* 사이드바 브랜드 (6.2) */
+.yl-sidebar-brand {
+  padding-bottom: var(--yl-space-2);
+  border-bottom: 1px solid var(--yl-border);
+  margin-bottom: var(--yl-space-2);
+}
+.yl-sidebar-brand .yl-brand-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--yl-primary);
+}
+.yl-sidebar-brand .yl-brand-caption {
+  font-size: 12px;
+  color: var(--yl-text-secondary);
+}
+
+/* 메시지·알림 (6.7) — 좌측 4px 색 막대 */
+.yl-msg {
+  border-left: 4px solid var(--yl-border);
+  background-color: var(--yl-surface);
+  border-radius: var(--yl-radius-sm);
+  padding: var(--yl-space-2) var(--yl-space-3);
+  margin: var(--yl-space-2) 0;
+}
+.yl-msg.yl-msg-success { border-left-color: var(--yl-success); }
+.yl-msg.yl-msg-warning { border-left-color: var(--yl-warning); }
+.yl-msg.yl-msg-error   { border-left-color: var(--yl-error); }

@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yulee-common"
-version = "0.1.0"
-description = "율이공방 공통 GCP/Sheets/Secrets 유틸"
+version = "0.2.0"
+description = "율이공방 공통 GCP/Sheets/Secrets/Theme 유틸"
 requires-python = ">=3.10"
 dependencies = [
     "gspread>=5.10,<7",
@@ -16,3 +16,6 @@ dependencies = [
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["yulee_common*"]
+
+[tool.setuptools.package-data]
+"yulee_common.theme" = ["assets/*.css", "assets/*.template"]
