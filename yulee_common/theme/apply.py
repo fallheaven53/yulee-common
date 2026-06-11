@@ -46,8 +46,20 @@ def apply_style(mode=None, *, override=None):
     # 이후 CSS를 본문 텍스트로 렌더한다 — 반드시 제거 (v0.2.1 수정).
     css = build_css(tokens, mode=mode)
     css = "\n".join(line for line in css.splitlines() if line.strip())
-    st.markdown(inject_font(), unsafe_allow_html=True)
-    st.markdown(f"<style>\n{css}\n</style>", unsafe_allow_html=True)
+    _inject_html(st, inject_font())
+    _inject_html(st, f"<style>\n{css}\n</style>")
+
+
+def _inject_html(st, html_str):
+    """markdown 파서를 거치지 않는 HTML 주입 (v0.2.2).
+
+    st.html(1.32+)은 markdown 파싱이 없어 <style> 블록이 절대 깨지지 않는다.
+    구버전은 st.markdown 폴백 (빈 줄 제거 전제).
+    """
+    if hasattr(st, "html"):
+        st.html(html_str)
+    else:
+        st.markdown(html_str, unsafe_allow_html=True)
 
 
 def toggle_mode():

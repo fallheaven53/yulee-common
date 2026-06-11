@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.2 — 2026-06-11
+
+버그 수정 (patch) — CSS 텍스트 노출 근본 차단.
+
+- apply_style: HTML 주입을 st.html(1.32+)로 전환 — markdown 파서를 아예 거치지 않아 <style> 블록 깨짐이 구조적으로 불가능. 구버전 Streamlit은 st.markdown 폴백 (v0.2.1 빈 줄 제거 유지).
+- 토글 재주입(사이드바 컨텍스트 포함)도 동일 경로 — 호출 위치와 무관하게 안전.
+- 참고: components.v1.html은 iframe이라 CSS가 부모 문서에 적용되지 않아 채택 안 함.
+
+영향 앱: 10W (requirements @v0.2.2 갱신).
+
 ## v0.2.1 — 2026-06-11
 
 버그 수정 (patch) — 10W 프로토타입 실사고 대응.

@@ -79,6 +79,19 @@ def test_components_escape_html(fake_st):
     assert "&lt;b&gt;제목&lt;/b&gt;" in joined
 
 
+def test_apply_style_prefers_st_html(monkeypatch):
+    # st.html 지원 시 markdown 파서를 거치지 않음 (v0.2.2 — CSS 노출 근본 차단)
+    st = FakeSt()
+    st.html_calls = []
+    st.html = lambda body: st.html_calls.append(body)
+    monkeypatch.setitem(sys.modules, "streamlit", st)
+
+    apply_style()
+    assert len(st.html_calls) == 2             # 폰트 + 스타일
+    assert len(st.markdown_calls) == 0         # markdown 미사용
+    assert "<style>" in st.html_calls[1]
+
+
 def test_sidebar_brand_shows_version(fake_st):
     from yulee_common.theme.components import sidebar_brand
     sidebar_brand("관객", version="0.2.0")

@@ -11,7 +11,7 @@ from .theme import (
     header, sidebar_brand, card, metric_row,
 )
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 __all__ = [
     "GSheetClient", "get_client", "SCOPES_FULL", "SCOPES_SLIM",
     "get_secret", "get_gcp_credentials_dict", "get_spreadsheet_id",
