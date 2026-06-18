@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.4.0 — 2026-06 — 한국 전통색 라이트 토큰 + Pretendard 로컬 폰트 (#2026-079)
+
+설계서 #2026-079 최종확정본 기준. 공개 함수 시그니처 불변 — 앱은 import 변경 없이
+자동으로 새 디자인 적용(10W.audience 등 자동 전환). minor.
+
+- 토큰 전면 교체: 미드나잇 다크톤 → 한국 전통색 라이트 11색 (한지 `#F5EFE0` / 청자 `#2C5973` / 단청 황금 `#C9A046` 등, 설계서 [1.1]). 1차 OCR 오류 4건·누락 보정 반영.
+- CSS 변수명 통일 `--color-*` / `--space-*` / `--radius-*` / `--shadow-*`. 여백 7 / 라운드 4 / 그림자 3(large 미사용) / 버튼 3 / KPI 2단계.
+- 폰트: Wanted Sans CDN 제거 → Pretendard 로컬 woff2 4종 동봉(`styles/fonts/`, OFL 1.1, 내부망 무의존).
+- 신규: `styles/main.css`(3부), `streamlit/page_config.py`의 `setup_page()` 1줄 부트스트랩, 컴포넌트 `kpi_card`·`badge`·`status_dot`.
+- `apply_style` 기본 dark→light, `toggle_mode` 라이트 단일 단순화. `CHART_SEQUENCE`·`PLOTLY_TEMPLATE`(라이트) 추가.
+- 폰트 서빙 실측: woff2 원본 ~3.0MB → base64 인라인 ~4.0MB. 기본 `font="base64"`(zero-config), 용량 과대 시 `setup_page(font="static")` 폴백.
+- 소프트 폐기(옵션 A): `DARK_TOKENS`·`PLOTLY_TEMPLATE_DARK` 접근 시 DeprecationWarning + 라이트 alias. v0.5.0 완전 제거 예정.
+- 미변경: Tkinter 서브패키지는 기존 미드나잇/골드 유지(`get_tk_tokens`). 라이트 전환은 본 주문 범위 밖.
+- 테스트 갱신(총 66건 통과) + 자체 검증 6 시나리오 37건 PASS.
+
 ## v0.3.1 — 2026-06-11
 
 버그 수정 (patch).

@@ -4,7 +4,7 @@
 apply_style(Streamlit)과 API 일관: mode 기본 dark, override로 토큰 일부 보정.
 """
 
-from ..tokens import get_tokens
+from ..tokens import get_tk_tokens
 from .font import get_tk_typo, resolve_font_family
 
 _MODE_VAR = "yl_tk_theme_mode"
@@ -28,7 +28,7 @@ def apply_tk_style(root, mode="dark", *, override=None):
     """
     from tkinter import ttk
 
-    tokens = dict(get_tokens(mode))
+    tokens = dict(get_tk_tokens(mode))
     if override:
         tokens.update(override)
 
