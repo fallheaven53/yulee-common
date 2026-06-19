@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.1 — 2026-06-19 — DARK_TOKENS 하위호환 보정 (patch)
+
+회귀 수정. v0.4.0이 `DARK_TOKENS` 폐기 alias를 `LIGHT_TOKENS`로 연결하면서, 이를 직접
+참조하던 Tkinter 도구(20W 번역기 등)가 옛 키(`color.surface_alt`·`text_primary`·
+`text_secondary`·`success`·`error`)에서 `KeyError`로 실행 불가했다.
+
+- `DARK_TOKENS` 폐기 alias를 `LIGHT_TOKENS` → `_TK_DARK`(Tkinter 미드나잇/골드, 옛 키 보존)로
+  변경. 키 호환 복구 + DeprecationWarning은 유지(옵션 A). web 라이트 토큰·앱(10W·12W·18W)은 무영향.
+- 전 Tkinter 도구 9종 토큰 키 전수 점검 — 참조 키 전부 `_TK_DARK` 커버 확인.
+- test_dark_tokens_soft_deprecated 보정(LIGHT 동등 → get_tk_tokens('dark') 동등 + 옛 키 단언). 66 passed.
+
 ## v0.4.0 — 2026-06 — 한국 전통색 라이트 토큰 + Pretendard 로컬 폰트 (#2026-079)
 
 설계서 #2026-079 최종확정본 기준. 공개 함수 시그니처 불변 — 앱은 import 변경 없이

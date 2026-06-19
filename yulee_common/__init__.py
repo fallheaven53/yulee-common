@@ -16,7 +16,7 @@ from .theme import (
 )
 from .streamlit import setup_page, inject_design
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 # v0.3.x 폐기 심볼 호환 — 접근 시 DeprecationWarning (theme 경유).
 _DEPRECATED_NAMES = {"DARK_TOKENS", "PLOTLY_TEMPLATE_DARK"}

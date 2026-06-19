@@ -153,7 +153,10 @@ def get_tk_tokens(mode="dark"):
 # DARK_TOKENS / PLOTLY_TEMPLATE_DARK 는 LIGHT 동등물로 alias 하되, 접근 시
 # DeprecationWarning 을 1회 발생시킨다. v0.5.0 에서 완전 제거 예정(CHANGELOG).
 _DEPRECATED = {
-    "DARK_TOKENS": ("LIGHT_TOKENS", LIGHT_TOKENS),
+    # DARK_TOKENS 소비자는 Tkinter 도구(20W·08W·13W 등) — 옛 키(surface_alt·
+    # text_primary·text_secondary·success·error 등)와 다크값이 필요하다. 라이트
+    # 토큰으로 alias하면 키 불일치로 KeyError가 나므로 _TK_DARK로 alias(키 호환 유지).
+    "DARK_TOKENS": ("get_tk_tokens('dark')", _TK_DARK),
     "PLOTLY_TEMPLATE_DARK": ("PLOTLY_TEMPLATE", PLOTLY_TEMPLATE),
 }
 

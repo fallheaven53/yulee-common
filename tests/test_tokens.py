@@ -64,10 +64,14 @@ def test_plotly_template_light():
 
 
 def test_dark_tokens_soft_deprecated():
-    # 옵션 A 폐기: 접근 시 DeprecationWarning + LIGHT 동등 alias
+    # 옵션 A 폐기: 접근 시 DeprecationWarning. DARK_TOKENS는 Tkinter 옛 토큰
+    # (_TK_DARK)으로 alias하여 옛 키(surface_alt 등) 호환을 유지한다 —
+    # 라이트 토큰으로 alias하면 tk 도구(20W 등)가 KeyError로 깨짐 (2026-06-19 보정).
+    from yulee_common.theme.tokens import get_tk_tokens
     with pytest.warns(DeprecationWarning):
         dark = T.DARK_TOKENS
-    assert dark == LIGHT_TOKENS
+    assert dark == get_tk_tokens("dark")
+    assert "color.surface_alt" in dark      # 옛 키 호환 보장
     with pytest.warns(DeprecationWarning):
         tmpl = T.PLOTLY_TEMPLATE_DARK
     assert tmpl == PLOTLY_TEMPLATE
