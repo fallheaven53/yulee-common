@@ -4,10 +4,13 @@ from tkinter import ttk
 
 import pytest
 
-from yulee_common.theme.tokens import DARK_TOKENS, LIGHT_TOKENS
+from yulee_common.theme.tokens import get_tk_tokens
 from yulee_common.theme.tk import (
     apply_tk_style, toggle_tk_mode, get_current_tk_mode, header_tk,
 )
+
+DARK_TOKENS = get_tk_tokens("dark")
+LIGHT_TOKENS = get_tk_tokens("light")
 
 
 @pytest.fixture

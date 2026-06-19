@@ -1,0 +1,10 @@
+# 율이공방 Streamlit 공통 테마 — yulee-common v0.4.0 (#2026-079)
+# 각 앱 .streamlit/config.toml [theme] 섹션에 복사한다.
+# 이 5색은 Streamlit 기본 위젯 1차 색이며, 실제 Pretendard 폰트와 세부 규칙은
+# main.css(setup_page/inject_design)가 강제한다.
+[theme]
+primaryColor = "#2C5973"
+backgroundColor = "#F5EFE0"
+secondaryBackgroundColor = "#FFFEF9"
+textColor = "#1F1F1F"
+font = "sans serif"

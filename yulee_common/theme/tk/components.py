@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Tkinter 컴포넌트 헬퍼 (선택 — 설계서 #2026-073 7.4절)."""
 
-from ..tokens import get_tokens
+from ..tokens import get_tk_tokens
 from .style import get_current_tk_mode
 
 
@@ -17,7 +17,7 @@ def header_tk(parent, title, subtitle=None):
                   style="HeaderSub.TLabel").pack(side="left", padx=12)
     frame.pack(fill="x", padx=12, pady=(10, 4))
 
-    tokens = get_tokens(get_current_tk_mode(parent))
+    tokens = get_tk_tokens(get_current_tk_mode(parent))
     sep = tk.Frame(parent, height=1, bg=tokens["color.accent"])
     sep.pack(fill="x", padx=12, pady=(0, 8))
     return frame
@@ -28,7 +28,7 @@ def card_tk(parent, *, title=None):
     import tkinter as tk
     from tkinter import ttk
 
-    tokens = get_tokens(get_current_tk_mode(parent))
+    tokens = get_tk_tokens(get_current_tk_mode(parent))
     outer = tk.Frame(parent, bg=tokens["color.border"], padx=1, pady=1)
     inner = ttk.Frame(outer, style="TFrame", padding=12)
     if title:

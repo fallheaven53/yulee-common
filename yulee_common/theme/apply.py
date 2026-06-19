@@ -9,26 +9,21 @@ _APPLIED_KEY = "yl_theme_applied"
 
 
 def get_current_mode():
-    """현재 모드. session_state 없으면(테스트 등) dark."""
-    try:
-        import streamlit as st
-        return st.session_state.get(_MODE_KEY, "dark")
-    except Exception:
-        return "dark"
+    """현재 모드. v0.4.0은 라이트 단일 — 항상 light (시그니처 유지)."""
+    return "light"
 
 
 def apply_style(mode=None, *, override=None):
     """디자인 토큰 CSS를 1회 주입. 각 앱 app.py 최상단에서 호출.
 
     Args:
-        mode: "dark" | "light". 미지정 시 session_state["yl_theme_mode"], 없으면 dark.
+        mode: v0.3.x 호환 인자. v0.4.0은 라이트 단일이라 무시되고 항상 라이트.
         override: 토큰 일부 덮어쓰기 dict (예: {"color.accent": "#..."}). 재배포 없는
-            즉시 보정용 (롤백 안전망 3).
+            즉시 보정용 (롤백 안전망).
     """
     import streamlit as st
 
-    if mode is None:
-        mode = get_current_mode()
+    mode = "light"  # v0.4.0 라이트 단일
 
     tokens = dict(get_tokens(mode))
     if override:
@@ -63,23 +58,10 @@ def _inject_html(st, html_str):
 
 
 def toggle_mode():
-    """사이드바 다크/라이트 토글 위젯. 변경 시 session_state 갱신 후 재주입.
+    """v0.4.0 단순화 — 라이트 단일 모드라 토글 위젯 없이 'light' 반환.
 
-    Returns: 선택된 모드 문자열.
+    v0.3.x에서 사이드바 다크/라이트 토글로 쓰이던 자리. 시그니처는 호환을 위해
+    유지하되, 라이트 토큰만 존재하므로 항상 라이트를 보장하고 'light'를 돌려준다.
     """
-    import streamlit as st
-
-    current = get_current_mode()
-    choice = st.radio(
-        "화면 모드",
-        options=["dark", "light"],
-        format_func=lambda m: "🌙 다크" if m == "dark" else "☀ 라이트",
-        index=0 if current == "dark" else 1,
-        horizontal=True,
-        key="yl_theme_toggle",
-        label_visibility="collapsed",
-    )
-    if choice != current:
-        st.session_state[_MODE_KEY] = choice
-        apply_style(mode=choice)
-    return choice
+    apply_style(mode="light")
+    return "light"
